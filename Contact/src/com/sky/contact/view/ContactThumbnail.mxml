@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:HBox xmlns:mx="http://www.adobe.com/2006/mxml"
+		 width="100%"
+		 backgroundColor="#FEF4A0"
+		 backgroundAlpha="0.5"
+		 verticalScrollPolicy="off"
+		 horizontalScrollPolicy="off">
+	
+	<mx:Image source="pic.png"
+			  width="70"
+			  height="70"/>
+	
+	<!--图像组件，用以显示头像图标-->
+	<mx:VBox height="80"
+			 verticalAlign="middle">
+		<mx:HBox>
+			<mx:Label text="姓名:"
+					  color="blue"
+					  fontWeight="bold"/>
+			<mx:Label text="{data.fullname}"
+					  color="#775C5C"/>
+		</mx:HBox>
+		<mx:HBox>
+			<mx:Label text="Email:"
+					  color="green"
+					  fontWeight="bold"/>
+			<mx:Label text="{data.emailaddress}"
+					  color="#775C5C"/>
+		</mx:HBox>
+		<mx:HBox>
+			<mx:Label text="时间:"
+					  color="red"
+					  fontWeight="bold"/>
+			<mx:Label text="{data.addcontactDate}"
+					  color="#775C5C"/>
+		</mx:HBox>
+	</mx:VBox>
+</mx:HBox>

@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:Panel xmlns:mx="http://www.adobe.com/2006/mxml"
+		  xmlns:view="com.sky.contact.view.*"
+		  title="我的联系人"
+		  horizontalAlign="left"
+		  height="350">
+
+	<mx:Script>
+		<![CDATA[
+			import com.adobe.cairngorm.control.CairngormEventDispatcher;
+			import com.sky.contact.control.commands.events.AddContactEvent;
+			import com.sky.contact.model.AddContact;
+			import com.sky.contact.model.vo.ContactVO;
+			import com.sky.contact.model.XModelLocator;
+			import mx.collections.ArrayCollection;
+
+			[Bindable]
+			public var addcontact:AddContact; //定义可绑定的属性
+
+			[Bindable]
+			public var contacts:ArrayCollection; //定义可绑定的属性
+
+			/**
+			 * 添加联系人的处理函数
+			 */
+			public function addContact():void
+			{
+				var contactVO:ContactVO=new ContactVO(); //自定义的数据模型.
+				
+				/*初始化contactVO变量数据*/
+				contactVO.fullname=fullname.text;
+				contactVO.emailaddress=emailaddress.text;
+				
+				//自定义的事件.
+				var event:AddContactEvent=new AddContactEvent(contactVO);
+				CairngormEventDispatcher.getInstance().dispatchEvent(event); //广播事件.前台控制器因此收到此事件.
+				
+				/*清空输入框*/
+				fullname.text="";
+				emailaddress.text="";
+			}
+		]]>
+	</mx:Script>
+	<mx:HBox height="100%">
+		<mx:VBox>
+			<mx:Spacer height="70"/>
+			<mx:Form id="addcontactForm">
+				<!--表单组件,用以提交数据-->
+				<mx:HBox width="100%"
+						 horizontalAlign="left">
+					<mx:Text text="添加联系人:"/>
+				</mx:HBox>
+				<mx:FormItem label="姓名: ">
+					<mx:TextInput id="fullname"/>
+					<!--“姓名”输入框-->
+				</mx:FormItem>
+				<mx:FormItem label="Email地址: ">
+					<mx:TextInput id="emailaddress"/>
+					<!--“Email地址”输入框-->
+				</mx:FormItem>
+				<mx:HBox width="100%"
+						 horizontalAlign="right">
+					<mx:Button label="添加"
+							   enabled="{!addcontact.isPending}"
+							   click="addContact()"/>
+					<!--“添加”按钮-->
+				</mx:HBox>
+			</mx:Form>
+			<mx:Text text="{addcontact.statusMessage }"
+					 textAlign="center"/>
+		</mx:VBox>
+		<mx:VRule height="100%"
+				  strokeColor="#DDDDDD"/>
+		<!--垂直分隔线-->
+		<mx:VBox paddingTop="15"
+				 paddingLeft="15"
+				 paddingRight="15"
+				 paddingBottom="15">
+			<mx:Text text="联系人列表"/>
+			<!--列表组件，用以显示数据-->
+			<mx:List wordWrap="true"
+					 itemRenderer="com.sky.contact.view.ContactThumbnail"
+					 dataProvider="{contacts}"
+					 width="308"
+					 height="220"/>
+		</mx:VBox>
+	</mx:HBox>
+</mx:Panel>

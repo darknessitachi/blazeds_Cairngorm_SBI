@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:Application xmlns:mx="http://www.adobe.com/2006/mxml"
+				xmlns:business="com.sky.contact.business.*"
+				xmlns:control="com.sky.contact.control.*"
+				xmlns:view="com.sky.contact.view.*"
+				pageTitle="Cairngorm实例"
+				horizontalAlign="center"
+				verticalAlign="middle"
+				fontSize="13"
+				initialize="init()">
+
+	<mx:Style source="style/style.css"/>
+	<mx:Script>
+		<![CDATA[
+			import mx.core.Container;
+			import com.sky.contact.model.XModelLocator;
+			import com.sky.contact.model.vo.ContactVO;
+			import mx.collections.ArrayCollection;
+			import mx.rpc.events.ResultEvent;
+			import mx.rpc.events.FaultEvent;
+			import mx.utils.ObjectUtil;
+			import mx.controls.Alert;
+			import mx.utils.StringUtil;
+			import com.sky.contact.business.ContactService;
+			import mx.rpc.remoting.mxml.RemoteObject;
+
+			[Bindable]
+			public var model:XModelLocator=XModelLocator.getInstance(); //定义模型定位器实例
+
+			private function resultHandler(event:ResultEvent):void
+			{
+				model.contacts.addAll(ArrayCollection(event.result));
+			}
+
+			private function faultHandler(event:FaultEvent):void
+			{
+				Alert.show(ObjectUtil.toString(event.fault));
+			}
+
+			private function init():void
+			{
+				ro.getContactList();
+			}
+			
+		]]>
+	</mx:Script>
+
+	<mx:RemoteObject id="ro"
+					 destination="contactService"
+					 endpoint="http://localhost:8080/blazeds/spring/messagebroker/amf"
+					 result="resultHandler(event)"
+					 fault="faultHandler(event)"/>
+
+	<!--添加前台控制器-->
+	<control:AddContactControl id="controller"/>
+
+	<!--添加自定义组件AddContactPanel-->
+	<view:AddContactPanel id="addcontactPanel"
+						  contacts="{model.contacts}"
+						  addcontact="{ model.addcontact }"/>
+</mx:Application>

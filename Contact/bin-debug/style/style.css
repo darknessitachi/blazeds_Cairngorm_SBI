@@ -1,0 +1,100 @@
+Application
+{
+	backgroundColors: #000000,#3f3f3f;
+	backgroundImage: Embed(source="/style/background.jpg");
+	backgroundSize: "100%";
+	fontSize:14;
+}
+
+Button
+{
+	upSkin: Embed(source="buttons/up.png",
+		scaleGridTop=5, 				
+	    scaleGridBottom=10, 
+	    scaleGridLeft=5, 
+	    scaleGridRight=10
+	);
+	overSkin: Embed(source="buttons/over.png",
+		scaleGridTop=5, 				
+	    scaleGridBottom=10, 
+	    scaleGridLeft=5, 
+	    scaleGridRight=10
+	);
+	downSkin: Embed(source="buttons/up.png",
+		scaleGridTop=5, 				
+	    scaleGridBottom=10, 
+	    scaleGridLeft=5, 
+	    scaleGridRight=10
+	);
+	disabledSkin: Embed(source="buttons/disable.png",
+		scaleGridTop=5, 				
+	    scaleGridBottom=10, 
+	    scaleGridLeft=5, 
+	    scaleGridRight=10
+	);
+	
+	selectedDisabledSkin: Embed(source="buttons/over.png",
+		scaleGridTop=5, 				
+	    scaleGridBottom=10, 
+	    scaleGridLeft=5, 
+	    scaleGridRight=10
+	);	
+	
+	selectedDownSkin: Embed(source="buttons/over.png",
+		scaleGridTop=5, 				
+	    scaleGridBottom=10, 
+	    scaleGridLeft=5, 
+	    scaleGridRight=10
+	);
+	
+	selectedOverSkin: Embed(source="buttons/over.png",
+		scaleGridTop=5, 				
+	    scaleGridBottom=10, 
+	    scaleGridLeft=5, 
+	    scaleGridRight=10
+	);
+	
+	selectedUpSkin: Embed(source="buttons/over.png",
+		scaleGridTop=5, 				
+	    scaleGridBottom=10, 
+	    scaleGridLeft=5, 
+	    scaleGridRight=10
+	);	
+	
+	color: #000000;
+	textRollOverColor: #000000;
+	textSelectedColor:#000000;
+}
+
+
+Image
+{
+	brokenImageSkin: Embed("/style/other/brokenImage.png");
+}
+
+
+
+
+Panel
+{	
+	backgroundAlpa:.7;				
+}
+
+.title {
+	fontSize: 11;
+	color: #ffffff;		
+	fontWeight: bold;
+}
+
+TextInput
+{
+	backgroundImage: Embed(source="/style/textInput/up.png",
+		scaleGridTop=1, 				
+	    scaleGridBottom=2, 
+	    scaleGridLeft=2, 
+	    scaleGridRight=4
+	);
+	backgroundSize:"100%";
+	cornerRadius:0;
+	border-style:none;
+}
